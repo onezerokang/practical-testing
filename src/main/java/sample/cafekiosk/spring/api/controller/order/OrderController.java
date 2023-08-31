@@ -1,12 +1,12 @@
-package sample.cafekiosk.spring.domain.api.controller.order;
+package sample.cafekiosk.spring.api.controller.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import sample.cafekiosk.spring.domain.api.service.order.OrderService;
-import sample.cafekiosk.spring.domain.api.service.order.request.OrderCreateRequest;
-import sample.cafekiosk.spring.domain.api.service.order.response.OrderResponse;
+import sample.cafekiosk.spring.api.service.order.request.OrderCreateRequest;
+import sample.cafekiosk.spring.api.service.order.response.OrderResponse;
+import sample.cafekiosk.spring.api.service.order.OrderService;
 
 import java.time.LocalDateTime;
 
