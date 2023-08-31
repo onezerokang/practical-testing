@@ -1,5 +1,6 @@
 package sample.cafekiosk.spring.domain.product;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,12 @@ class ProductRepositoryTest {
    @Autowired
    private ProductRepository productRepository;
 
-   @DisplayName("원하는 판매 상태를 가진 판매 상품들을 조회한다.")
+    @AfterEach
+    void tearDown() {
+        productRepository.deleteAllInBatch();
+    }
+
+    @DisplayName("원하는 판매 상태를 가진 판매 상품들을 조회한다.")
    @Test
    void findAllByProductStatus() {
        // given
