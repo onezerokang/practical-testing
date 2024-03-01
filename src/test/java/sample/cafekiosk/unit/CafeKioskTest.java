@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class CafeKioskTest {
-    @DisplayName("키오스크에 상품을 추가할 수 있다.")
+    @DisplayName("음료를 1개 추가하면 주문 목록에 담긴다.")
     @Test
     void add() {
         // given
@@ -26,7 +26,7 @@ class CafeKioskTest {
         assertThat(cafeKiosk.getBeverages().get(0).getName()).isEqualTo("아메리카노");
     }
 
-    @DisplayName("음료는 여러잔 주문할 수 있다.")
+    @DisplayName("음료를 여러개 추가하면 주문 목록에 담긴다.")
     @Test
     void addSeveralBeverages() {
         // given
@@ -41,7 +41,7 @@ class CafeKioskTest {
         assertThat(cafeKiosk.getBeverages().get(1)).isEqualTo(americano);
     }
 
-    @DisplayName("음료를 0잔 이하로 주문할 경우 예외를 던진다.")
+    @DisplayName("음료는 0잔 이하로 주문할 수 없다.")
     @Test
     void addZeroBeverages() {
         // given
@@ -54,7 +54,7 @@ class CafeKioskTest {
                 .hasMessage("음료는 한 잔 이상 주문하실 수 있습니다.");
     }
 
-    @DisplayName("키오스크에서 상품을 삭제할 수 있다.")
+    @DisplayName("주문 목록에 담긴 음료를 1개 삭제할 수 있다.")
     @Test
     void remove() {
         // given
@@ -69,7 +69,7 @@ class CafeKioskTest {
         assertThat(cafeKiosk.getBeverages()).isEmpty();
     }
 
-    @DisplayName("키오스크의 모든 상품을 삭제할 수 있다.")
+    @DisplayName("주문 목록에 담기 모든 음료를 삭제할 수 있다.")
     @Test
     void clear() {
         // given
@@ -84,7 +84,22 @@ class CafeKioskTest {
         assertThat(cafeKiosk.getBeverages()).isEmpty();
     }
 
-    @DisplayName("키오스크에서는 주문을 생성할 수 있다.")
+    @DisplayName("주문 목록에 담긴 음료의 총 가격을 계산할 수 있다.")
+    @Test
+    void calculateTotalPrice() {
+        // given
+        CafeKiosk cafeKiosk = new CafeKiosk();
+        cafeKiosk.add(new Americano());
+        cafeKiosk.add(new Latte());
+
+        // when
+        int totalPrice = cafeKiosk.calculateTotalPrice();
+
+        //then
+        assertThat(totalPrice).isEqualTo(9000);
+    }
+
+    @DisplayName("주문 목록에 담긴 음료 정보로 주문을 생성할 수 있다.")
     @Test
     void createOrderWithCurrentTime() {
         // given
